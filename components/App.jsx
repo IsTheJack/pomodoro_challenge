@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+
+// Presentational Components
+import Display from './Display.jsx';
+
+// Helpers
 import {
     minutesToSeconds,
     secondsToMilliseconds,
@@ -35,8 +40,8 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.state.totalTime}</h1>
+            <div className="app">
+                <Display time={this.state.totalTime} />
                 <button onClick={this.handleStart}>Começar</button>
                 <button onClick={this.handleStop}>parar</button>
             </div>

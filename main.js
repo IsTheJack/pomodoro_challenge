@@ -9,5 +9,5 @@ require("./assets/css/layout.css");
 
 render(
     <App />,
-    document.getElementById('app')
+    document.getElementById('root')
 );
