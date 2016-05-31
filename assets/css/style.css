@@ -1,0 +1,47 @@
+/* Little Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #282E3C;
+}
+
+h1 {
+    box-sizing: border-box;
+}
+
+/* Component Style */
+.app {
+    text-align: center;
+    font-family: 'Roboto', cursive;
+    color: #EDEDED;
+}
+
+.app-title {
+    margin-top: 60px;
+}
+
+.display {
+    font-size: 4.5em;
+    text-shadow: 1px 5px 25px #0B0D12;
+}
+
+.pomodoro-button {
+    height: 100px;
+    width: 100px;
+    margin: 30px;
+    font-size: 5.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: #333;
+    color: #EDEDED;
+}
+
+.pomodoro-button:hover {
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+    background-color: #1C1B1B;
+}
