@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Presentational Components
 import Display from './Display.jsx';
+import PomodoroButton from './PomodoroButton.jsx';
 
 // Helpers
 import {
@@ -13,37 +14,59 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            totalTime: minutesToSeconds(25),
-            time: minutesToSeconds(25),
-            timeElapsed: 0,
-        };
-
         // Binds
+        this.initial = this.initial.bind(this);
         this.handleStart = this.handleStart.bind(this);
+        this.handleStop = this.handleStop.bind(this);
+
+        this.initial();
+        this.state = {
+            time: minutesToSeconds(25),
+        };
+    }
+
+    initial() {
+        this.totalTime = minutesToSeconds(25);
+        this.timeElapsed = 0;
     }
 
     handleStart() {
-        setInterval(
-            () => { 
-                this.setState({'timeElapsed': this.state.timeElapsed + 1});
-                console.log(this.state.timeElapsed);
-                this.setState({'totalTime': this.state.time - this.state.timeElapsed});
-            },
-            secondsToMilliseconds(1)
-        );
+        // Pause unless interval is not defined
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = undefined;
+        } else {
+            this.interval = setInterval(
+                () => { 
+                    this.timeElapsed++;
+                    this.setState({'time': this.totalTime - this.timeElapsed});
+                },
+                secondsToMilliseconds(1)
+            );
+        }
     }
 
     handleStop() {
-        console.log('Stop');
+        clearInterval(this.interval);
+        this.interval = undefined;
+        this.initial();
+        this.setState({
+            time: this.totalTime,
+        });
     }
 
     render() {
         return (
             <div className="app">
-                <Display time={this.state.totalTime} />
-                <button onClick={this.handleStart}>Começar</button>
-                <button onClick={this.handleStop}>parar</button>
+                <Display time={this.state.time} />
+
+                <PomodoroButton handleClick={this.handleStart}>
+                    Start
+                </PomodoroButton>
+
+                <PomodoroButton handleClick={this.handleStop}>
+                    Stop
+                </PomodoroButton>
             </div>
         );
     }
