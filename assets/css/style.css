@@ -26,14 +26,13 @@ h1 {
 }
 
 .pomodoro-button {
-    height: 100px;
-    width: 100px;
+    height: 103px;
+    width: 103px;
     margin: 30px;
     font-size: 5.5em;
     cursor: pointer;
     border-radius: 50%;
     padding: 0;
-    border: 0;
     outline: none;
     background-color: #333;
     color: #EDEDED;
