@@ -5,7 +5,8 @@ import { createStore } from 'redux';
 import App from './components/App.jsx';
 
 // Importing CSS files
-require("./assets/css/layout.css");
+require("./assets/css/style.css");
+require("./assets/css/user-alert.css");
 
 render(
     <App />,
