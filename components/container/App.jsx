@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 // Presentational Components
-import Display from './Display.jsx';
-import PomodoroButton from './PomodoroButton.jsx';
-import UserAlert from './UserAlert.jsx';
+import Display from '../presentational/Display.jsx';
+import PomodoroButton from '../presentational/PomodoroButton.jsx';
+import UserAlert from '../presentational/UserAlert.jsx';
 
 // Helpers
 import {
     minutesToSeconds,
     secondsToMilliseconds,
     formatToMinutesAndSeconds,
-} from '../helpers/time';
+} from '../../helpers/time';
 
 export default class App extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class App extends Component {
         this.startPomodoro = this.startPomodoro.bind(this);
         this.pausePomodoro = this.pausePomodoro.bind(this);
         this.stopPomodoro = this.stopPomodoro.bind(this);
-        this.timeReset = this.timeReset.bind(this);
+        this.intervalReset = this.intervalReset.bind(this);
         this.userConfirmation = this.userConfirmation.bind(this);
 
         this.initial();
@@ -34,7 +34,8 @@ export default class App extends Component {
 
     // Set some internal initial values
     initial() {
-        this.totalTime = minutesToSeconds(0.05);
+        const minutes = 25;
+        this.totalTime = minutesToSeconds(minutes);
         this.timeElapsed = 0;
     }
 
@@ -64,18 +65,18 @@ export default class App extends Component {
     }
 
     pausePomodoro() {
-        this.timeReset();
+        this.intervalReset();
     }
 
     stopPomodoro() {
-        this.timeReset();
+        this.intervalReset();
         this.initial();
         this.setState({
             time: this.totalTime,
         });
     }
 
-    timeReset() {
+    intervalReset() {
         clearInterval(this.interval);
         this.interval = undefined;
     }
@@ -86,6 +87,7 @@ export default class App extends Component {
         });
     }
 
+    // Callback for message component
     userConfirmation() {
         console.log('xablau');
         this.setState({
